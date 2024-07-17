@@ -1,0 +1,119 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+li {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+
+.author-name {
+    font-weight: bold;
+    color: #007bff;
+    font-size: 22px;
+}
+
+.book-title {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.book-description {
+    color: #666; 
+}
+
+.book-rating {
+    font-style: italic;
+}
+
+.publish-date {
+    font-size: 0.9em;
+    color: #999; 
+}
+
+nav {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: lightgray;
+}
+
+nav li {
+    float: center;
+}
+
+nav li a {
+    display: block;
+    color: #000; 
+    font-size: 18px; 
+    text-align: center;
+    padding: 14px 16px; 
+    text-decoration: none;
+}
+
+nav li a.active {
+    background-color: gray;
+    color: white;
+}
+
+nav li a:hover {
+    background-color: orange;
+    color: white;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    margin-top: 50px; 
+}
+
+
+.welcome {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.welcome p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #666;
+}
+
+.home-link {
+    color: #007bff; 
+    text-decoration: none;
+}
+
+.home-link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .welcome {
+        padding: 10px;
+    }
+}
