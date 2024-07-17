@@ -42,8 +42,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Running Tests
 To run the tests for this project:
-    ```bash
-    python manage.py test
+    ```python manage.py test```
 
 
 ### Contributing
