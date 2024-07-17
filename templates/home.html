@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Library{% endblock %}
+
+{% block content %}
+    <div class="welcome">
+        <h1>Welcome to the Library Home Page</h1>
+        <p>
+            This library offers a wide range of books covering various genres and topics. 
+            Explore our collection and find your next read!
+        </p>
+        <p class="back-link"><a class="home-link" href="{% url 'book_list' %}">View Books</a></p>
+    </div>
+{% endblock %}
