@@ -9,11 +9,13 @@
 <ul>
     {% for book in books_object %}
     <li>
-        <h3 class="author-name">Author Name: {{ book.auther }}</h3>
-        <p class="book-title">Title: {{ book.title }}</p>
-        <p class="book-description">Description: {{ book.description }}</p>
-        <p class="book-rating">Rating: {{ book.rating }}</p>
-        <p class="publish-date">Publish Date: {{ book.publish_date }}</p>
+        <h3 class="author-name">  
+            Author Name:  
+                <a href="{% url 'details_book' book.pk  %}">
+                    {{ book.auther }}
+                </a>
+        </h3>
+        
     </li>
     {% empty %}
     <li>No books available.</li>

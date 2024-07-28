@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Book Details Page</h1>
+    <p class="book-title">Title: {{ book.title }}</p>
+    <p class="book-description">Description: {{ book.description }}</p>
+    <p class="book-rating">Rating: {{ book.rating }}</p>
+    <p class="publish-date">Publish Date: {{ book.publish_date }}</p>
+
+    <p class="back-link"><a class="home-link" href="{% url 'book_list' %}">Back to Books</a></p>
+
+{% endblock content %}
