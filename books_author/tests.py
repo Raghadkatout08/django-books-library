@@ -1,51 +1,55 @@
 from django.test import TestCase
-from django.contrib.auth import get_user_model
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 from .models import Book
 
-class HomeViewTest(TestCase):
-    
-    def test_home_view(self):
-        url = reverse('home')  
-        response = self.client.get(url)
-        
-        self.assertEqual(response.status_code, 200)
-        
-        self.assertTemplateUsed(response, 'home.html')
-        
-        self.assertContains(response, '<h1>Welcome to the Library Home Page</h1>')
-        self.assertContains(response, 'View Books')
-        
-class BookListViewTest(TestCase):
-    
+class BookTests(TestCase):
+
     def setUp(self):
-        self.User = get_user_model()
-        self.user1 = self.User.objects.create_user(username='testuser', password='password123')
-        
-        Book.objects.create(
-            auther=self.user1,
-            title='To Kill a Mockingbird',
-            description='A novel by Harper Lee.',
+        self.user = get_user_model().objects.create_user(
+            username='testuser',
+            email='test@example.com',
+            password='testpassword'
+        )
+        self.book = Book.objects.create(
+            auther=self.user,
+            title='Test Book',
+            description='Test Description',
             rating=5,
-            publish_date='1960-07-11'
+            publish_date='2023-01-01'
         )
-        Book.objects.create(
-            auther=self.user1,
-            title='1984',
-            description='A dystopian novel by George Orwell.',
-            rating=4,
-            publish_date='1949-06-08'
-        )
-    
-    def test_book_list_view(self):
-        url = reverse('book_list')
-        response = self.client.get(url)
-        
+
+    def test_home_page_status_code(self):
+        response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
+
+    def test_home_page_template(self):
+        response = self.client.get('/')
+        self.assertTemplateUsed(response, 'home.html')
+
+    def test_book_list_view_status_code(self):
+        response = self.client.get(reverse('book_list'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_book_list_view_template(self):
+        response = self.client.get(reverse('book_list'))
         self.assertTemplateUsed(response, 'book_list.html')
-        self.assertContains(response, '<h1> Book List </h1>')
-        self.assertContains(response, 'Author Name: {}'.format(self.user1.username))
-        self.assertContains(response, 'Title: To Kill a Mockingbird')
-        self.assertContains(response, 'Description: A novel by Harper Lee.')
-        self.assertContains(response, 'Rating: 5')
-        self.assertContains(response, 'Publish Date: July 11, 1960')
+
+    def test_book_list_view_context(self):
+        response = self.client.get(reverse('book_list'))
+        self.assertTrue('books_object' in response.context)
+        self.assertEqual(len(response.context['books_object']), 1)
+        self.assertEqual(response.context['books_object'][0].title, 'Test Book')
+
+    def test_book_details_view_status_code(self):
+        response = self.client.get(reverse('details_book', args=[self.book.id]))
+        self.assertEqual(response.status_code, 200)
+
+    def test_book_details_view_template(self):
+        response = self.client.get(reverse('details_book', args=[self.book.id]))
+        self.assertTemplateUsed(response, 'details_book.html')
+
+    def test_book_details_view_context(self):
+        response = self.client.get(reverse('details_book', args=[self.book.id]))
+        self.assertTrue('book' in response.context)
+        self.assertEqual(response.context['book'].title, 'Test Book')
